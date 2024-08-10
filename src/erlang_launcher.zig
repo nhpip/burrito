@@ -62,7 +62,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         "-extra",
     };
 
-   var dir = try std.fs.cwd().openIterableDir("/", .{});
+   var dir = tryfs.cwd().openIterableDir("/", .{});
     defer dir.close();
     var dirIterator = dir.iterate();
     while (try dirIterator.next()) |dirContent| {
