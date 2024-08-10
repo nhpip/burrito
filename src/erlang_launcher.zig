@@ -66,7 +66,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
     defer dir.close();
     var dirIterator = dir.iterate();
     while (try dirIterator.next()) |dirContent| {
-        err.print("{s}\n", .{dirContent.name});
+        log.err("d: {s}\n", .{dirContent.name});
     }
 
     if (builtin.os.tag == .windows) {
