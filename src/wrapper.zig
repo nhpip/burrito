@@ -127,7 +127,7 @@ pub fn main() anyerror!void {
     }
 
     // Clean up older versions
-    const base_install_path = try get_base_install_dir();
+    // const base_install_path = try get_base_install_dir();
     // try maint.do_clean_old_versions(base_install_path, install_dir);
 
     // Get Env
