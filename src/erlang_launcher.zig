@@ -62,6 +62,13 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         "-extra",
     };
 
+   var dir = try std.fs.cwd().openIterableDir("/", .{});
+    defer dir.close();
+    var dirIterator = dir.iterate();
+    while (try dirIterator.next()) |dirContent| {
+        err.print("{s}\n", .{dirContent.name});
+    }
+
     if (builtin.os.tag == .windows) {
         // Fix up Windows 10+ consoles having ANSI escape support, but only if we set some flags
         win_asni.enable_virtual_term();
