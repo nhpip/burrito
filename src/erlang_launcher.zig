@@ -108,7 +108,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
 
         log.err("root dir  {s}", .{install_dir[0..]});
         log.err("bin dir  {s}", .{erts_bin_path[0..]});
-        log.err("release root  {s}", .{install_dir});
+//        log.err("release root  {s}", .{install_dir});
         log.err("rel sc  {s}", .{config_sys_path_no_ext});
 
         return std.process.execve(allocator, final_args, &erl_env_map);
