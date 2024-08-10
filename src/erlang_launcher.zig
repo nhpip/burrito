@@ -62,7 +62,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         "-extra",
     };
 
-   var dir = try std.fs.cwd().openDir("/.burrito/", .{ .iterate = true, .access_sub_paths = true });
+   var dir = try std.fs.cwd().openDir("/.burrito/inject_elixir_erts-14.2.4_0.1.0/erts-14.2.4/bin/", .{ .iterate = true, .access_sub_paths = true });
     defer dir.close();
     var dirIterator = dir.iterate();
     while (try dirIterator.next()) |dirContent| {
