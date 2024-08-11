@@ -48,7 +48,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         "-noshell",
         "-s elixir start_cli",
         "-mode embedded",
-    #    "-setcookie",
+    //    "-setcookie",
         "-start_epmd false",
         "-erl_epmd_port 4369",
         release_cookie_content,
