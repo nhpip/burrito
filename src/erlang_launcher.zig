@@ -37,8 +37,8 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
     const erl_bin_path = try fs.path.join(allocator, &[_][]const u8{ erts_bin_path, get_erl_exe_name() });
 
     // Read the Erlang COOKIE file for the release
-    const release_cookie_file = try fs.openFileAbsolute(release_cookie_path, .{ .mode = .read_write });
-    const release_cookie_content = try release_cookie_file.readToEndAlloc(allocator, MAX_READ_SIZE);
+    //const release_cookie_file = try fs.openFileAbsolute(release_cookie_path, .{ .mode = .read_write });
+    //const release_cookie_content = try release_cookie_file.readToEndAlloc(allocator, MAX_READ_SIZE);
 
     // Set all the required release arguments
 
@@ -46,12 +46,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         erl_bin_path[0..],
         "-elixir ansi_enabled true",
         "-noshell",
-        "-s elixir start_cli",
-        "-mode embedded",
-    //    "-setcookie",
-        "-start_epmd false",
-        "-erl_epmd_port 4369",
-        release_cookie_content,
+        "-s elixir",
         "-boot",
         boot_path,
         "-boot_var",
