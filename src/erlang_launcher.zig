@@ -36,12 +36,7 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
     const erts_bin_path = try fs.path.join(allocator, &[_][]const u8{ install_dir, erts_version_name, "bin" });
     const erl_bin_path = try fs.path.join(allocator, &[_][]const u8{ erts_bin_path, get_erl_exe_name() });
 
-    // Read the Erlang COOKIE file for the release
-    //const release_cookie_file = try fs.openFileAbsolute(release_cookie_path, .{ .mode = .read_write });
-    //const release_cookie_content = try release_cookie_file.readToEndAlloc(allocator, MAX_READ_SIZE);
-
     // Set all the required release arguments
-
     const erlang_cli = &[_][]const u8{
         erl_bin_path[0..],
         "-elixir ansi_enabled true",
@@ -109,11 +104,6 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         try erl_env_map.put("RELEASE_ROOT", install_dir);
         try erl_env_map.put("RELEASE_SYS_CONFIG", config_sys_path_no_ext);
         try erl_env_map.put("__BURRITO", "1");
-
-        log.err("root dir  {s}", .{install_dir[0..]});
-        log.err("bin dir  {s}", .{erts_bin_path[0..]});
-//        log.err("release root  {s}", .{install_dir});
-        log.err("rel sc  {s}", .{config_sys_path_no_ext});
 
         return std.process.execve(allocator, final_args, &erl_env_map);
     }
