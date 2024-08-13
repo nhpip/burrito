@@ -24,7 +24,6 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
     const allocator = arena.allocator();
 
     // Computer directories we care about
-    // const release_cookie_path = try fs.path.join(allocator, &[_][]const u8{ install_dir, "releases", "COOKIE" });
     const release_lib_path = try fs.path.join(allocator, &[_][]const u8{ install_dir, "lib" });
     const install_vm_args_path = try fs.path.join(allocator, &[_][]const u8{ install_dir, "releases", meta.app_version, "vm.args" });
     const config_sys_path = try fs.path.join(allocator, &[_][]const u8{ install_dir, "releases", meta.app_version, "sys.config" });
@@ -53,13 +52,6 @@ pub fn launch(install_dir: []const u8, env_map: *EnvMap, meta: *const MetaStruct
         config_sys_path,
         "-extra",
     };
-
-   var dir = try std.fs.cwd().openDir("/.burrito/inject_elixir_erts-14.2.4_0.1.0/erts-14.2.4/bin/", .{ .iterate = true, .access_sub_paths = true });
-    defer dir.close();
-    var dirIterator = dir.iterate();
-    while (try dirIterator.next()) |dirContent| {
-        log.err("d: {s}\n", .{dirContent.name});
-    }
 
     if (builtin.os.tag == .windows) {
         // Fix up Windows 10+ consoles having ANSI escape support, but only if we set some flags
